@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocoPrint - Pricing</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #F5F7FA;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        /* Header */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #2A5DB0;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #FF7A00;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #2A5DB0;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid #2A5DB0;
+            color: #2A5DB0;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #2A5DB0;
+            color: white;
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: #2A5DB0;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Pricing Tabs */
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 500px;
+            margin: -30px auto 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pricing-tab {
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-tab.active {
+            background-color: #2A5DB0;
+            color: white;
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card-header {
+            background-color: #2A5DB0;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pricing-card-body {
+            padding: 30px;
+        }
+
+        .pricing-card-body ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-card-body ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pricing-card-body ul li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-value {
+            font-weight: 600;
+        }
+
+        .pricing-card-footer {
+            text-align: center;
+            padding: 0 30px 30px;
+        }
+
+        .price-tag {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2A5DB0;
+            margin-bottom: 20px;
+        }
+
+        .price-tag small {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .order-btn {
+            display: inline-block;
+            background-color: #FF7A00;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #E56F00;
+        }
+
+        /* Price Table */
+        .price-table-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .price-table th,
+        .price-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .price-table th {
+            background-color: #f5f7fa;
+            font-weight: 600;
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: #2A5DB0;
+        }
+
+        .table-section {
+            margin-bottom: 40px;
+        }
+
+        .table-section h2 {
+            margin-bottom: 20px;
+            color: #2A5DB0;
+        }
+
+        /* Additional Options */
+        .additional-options {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .additional-options h2 {
+            margin-bottom: 20px;
+            color: #2A5DB0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .option-card {
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: #2A5DB0;
+            background-color: rgba(42, 93, 176, 0.05);
+        }
+
+        .option-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .option-price {
+            font-weight: 700;
+            color: #2A5DB0;
+        }
+
+        .option-desc {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 60px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2A5DB0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2A5DB0;
+        }
+
+        .faq-answer {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2A5DB0;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #b9d0ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .pricing-tab {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .price-table th,
+            .price-table td {
+                padding: 12px 15px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">Doco<span>Print</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="order.html">Orders</a></li>
+                       
+                        <li><a href="dashboard.html">dashboard</a></li>
+                        <li><button class="btn-login">Logout</button></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Affordable Pricing for All Students</h1>
+            <p>Get quality prints at student-friendly prices. No surprises, no hidden fees.</p>
+        </div>
+    </div>
+
+    <section class="main-content">
+        <div class="container">
+            <div class="pricing-tabs">
+                <div class="pricing-tab active">Document Printing</div>
+                <div class="pricing-tab">Special Formats</div>
+            </div>
+
+            <div class="table-section">
+                <h2>Standard Document Printing</h2>
+                <div class="price-table-container">
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Paper Size</th>
+                                <th>Color Type</th>
+                                <th>Single/Double Side</th>
+                                <th>Price per Page</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A4</td>
+                                <td>Black & White</td>
+                                <td>Single Side</td>
+                                <td>₹3.00</td>
+                            </tr>
+                            <tr>
+                                <td>A4</td>
+                                <td>Black & White</td>
+                                <td>Double Side</td>
+                                <td>₹5.00</td>
+                            </tr>
+                            <tr>
+                                <td>A4</td>
+                                <td>Color</td>
+                                <td>Single Side</td>
+                                <td>₹10.00</td>
+                            </tr>
+                            <tr>
+                                <td>A4</td>
+                                <td>Color</td>
+                                <td>Double Side</td>
+                                <td>₹18.00</td>
+                            </tr>
+                            <tr>
+                                <td>A3</td>
+                                <td>Black & White</td>
+                                <td>Single Side</td>
+                                <td>₹6.00</td>
+                            </tr>
+                            <tr>
+                                <td>A3</td>
+                                <td>Black & White</td>
+                                <td>Double Side</td>
+                                <td>₹10.00</td>
+                            </tr>
+                            <tr>
+                                <td>A3</td>
+                                <td>Color</td>
+                                <td>Single Side</td>
+                                <td>₹20.00</td>
+                            </tr>
+                            <tr>
+                                <td>A3</td>
+                                <td>Color</td>
+                                <td>Double Side</td>
+                                <td>₹35.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <h2>Premium Paper Options</h2>
+                <div class="price-table-container">
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Paper Type</th>
+                                <th>Description</th>
+                                <th>Additional Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Standard (80 gsm)</td>
+                                <td>Regular paper suitable for assignments and notes</td>
+                                <td>₹0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Premium (100 gsm)</td>
+                                <td>Higher quality paper for professional documents</td>
+                                <td>+₹2.00/page</td>
+                            </tr>
+                            <tr>
+                                <td>Glossy (120 gsm)</td>
+                                <td>Perfect for presentations and graphics</td>
+                                <td>+₹5.00/page</td>
+                            </tr>
+                            <tr>
+                                <td>Card Stock (250 gsm)</td>
+                                <td>Thick, durable paper for covers and cards</td>
+                                <td>+₹8.00/page</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <h2>Binding Options</h2>
+                <div class="price-table-container">
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Binding Type</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Staple</td>
+                                <td>Simple corner or center stapling</td>
+                                <td>₹2.00</td>
+                            </tr>
+                            <tr>
+                                <td>Comb Binding</td>
+                                <td>Plastic comb binding (up to 100 sheets)</td>
+                                <td>₹35.00</td>
+                            </tr>
+                            <tr>
+                                <td>Spiral Binding</td>
+                                <td>Wire spiral binding (up to 150 sheets)</td>
+                                <td>₹45.00</td>
+                            </tr>
+                            <tr>
+                                <td>Hardcover Binding</td>
+                                <td>Professional hardcover binding for thesis</td>
+                                <td>₹150.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="additional-options">
+                <h2>Additional Services</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <div class="option-name">Lamination</div>
+                        <div class="option-price">₹15.00 per A4 sheet</div>
+                        <div class="option-desc">Protect your documents with waterproof lamination</div>
+                    </div>
+                    <div class="option-card">
+                        <div class="option-name">Clear Folder</div>
+                        <div class="option-price">₹10.00 each</div>
+                        <div class="option-desc">Transparent folders for presentations</div>
+                    </div>
+                    <div class="option-card">
+                        <div class="option-name">Express Service</div>
+                        <div class="option-price">+50% of total</div>
+                        <div class="option-desc">Get your prints ready in 15 minutes</div>
+                    </div>
+                    <div class="option-card">
+                        <div class="option-name">Document Scanning</div>
+                        <div class="option-price">₹5.00 per page</div>
+                        <div class="option-desc">Convert physical documents to digital files</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-grid" style="margin-top: 60px;">
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3>Student Basic</h3>
+                    </div>
+                    <div class="pricing-card-body">
+                        <ul>
+                            <li>
+                                <span>A4 Black & White</span>
+                                <span class="pricing-value">₹3.00</span>
+                            </li>
+                            <li>
+                                <span>A4 Color</span>
+                                <span class="pricing-value">₹10.00</span>
+                            </li>
+                            <li>
+                                <span>Standard Paper</span>
+                                <span class="pricing-value">Included</span>
+                            </li>
+                            <li>
+                                <span>Staple Binding</span>
+                                <span class="pricing-value">₹2.00</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <div class="price-tag">₹150 <small>Credit</small></div>
+                        <a href="#" class="order-btn">Buy Credits</a>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3>Student Pro</h3>
+                    </div>
+                    <div class="pricing-card-body">
+                        <ul>
+                            <li>
+                                <span>A4 Black & White</span>
+                                <span class="pricing-value">₹2.50</span>
+                            </li>
+                            <li>
+                                <span>A4 Color</span>
+                                <span class="pricing-value">₹8.00</span>
+                            </li>
+                            <li>
+                                <span>Premium Paper</span>
+                                <span class="pricing-value">Included</span>
+                            </li>
+                            <li>
+                                <span>All Binding Options</span>
+                                <span class="pricing-value">20% Off</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <div class="price-tag">₹500 <small>Credit</small></div>
+                        <a href="#" class="order-btn">Buy Credits</a>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3>Department Plan</h3>
+                    </div>
+                    <div class="pricing-card-body">
+                        <ul>
+                            <li>
+                                <span>A4 Black & White</span>
+                                <span class="pricing-value">₹2.00</span>
+                            </li>
+                            <li>
+                                <span>A4 Color</span>
+                                <span class="pricing-value">₹7.00</span>
+                            </li>
+                            <li>
+                                <span>All Paper Types</span>
+                                <span class="pricing-value">25% Off</span>
+                            </li>
+                            <li>
+                                <span>Priority Service</span>
+                                <span class="pricing-value">Included</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <div class="price-tag">Custom <small>Pricing</small></div>
+                        <a href="#" class="order-btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">How do I pay for printing?</div>
+                        <div class="faq-answer">You can add credits to your DocoPrint account using UPI, credit/debit cards, or campus cash. The amount will be deducted when you confirm your order.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How long does it take to get my prints?</div>
+                        <div class="faq-answer">Standard orders are typically ready for pickup within 30-60 minutes depending on the location. Express service can reduce this to 15 minutes.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Can I get a refund if there's an issue with my print?</div>
+                        <div class="faq-answer">Yes, if there's a quality issue with your print that is our fault, we'll reprint it for free or refund your credits. Just report the issue within 24 hours.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What file formats do you accept?</div>
+                        <div class="faq-answer">We accept most common file formats including PDF, DOCX, PPTX, JPG, PNG, and more. PDF is recommended for best results.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>DocoPrint</h3>
+                    <p>Making printing easy and affordable for all students.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="order.html">Orders</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="dashboard.html">dashboard</a></li>
+                        <li><button class="btn-login">Logout</button></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:info@docoprint.com">info@docoprint.com</a></li>
+                        <li><a href="tel:+1234567890">+123 456 7890</a></li>
+                        <li>Campus Main Road</li>
+                        <li>University Area, City</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help & Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DocoPrint. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
